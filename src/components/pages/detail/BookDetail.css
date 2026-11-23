@@ -124,6 +124,9 @@
   font-size: 29px;
 }
 
+.detail-star:hover {
+  color: var(--star);
+}
 
 .date-row {
   display: flex;
