@@ -1,5 +1,5 @@
 // 서비스 정보
-export const SERVICE_NAME = '북커버 AI 도서관';
+export const SERVICE_NAME = '작가의 산책';
 export const TEAM_NAME = 'KT AIVLE School AI 트랙 미니프로젝트 4차, 3반 9조';
 export const GITHUB_URL = 'https://github.com/ha-rameter/book_eating_cat';
 
