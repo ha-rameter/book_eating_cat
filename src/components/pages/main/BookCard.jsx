@@ -1,11 +1,24 @@
-function BookCard({ book, rank, onSelect, onLike }) {
+function highlight(title, keyword) {
+  if (!keyword) return title;
+  const index = title.toLowerCase().indexOf(keyword.toLowerCase());
+  if (index === -1) return title;
+  return (
+    <>
+      {title.slice(0, index)}
+      <mark>{title.slice(index, index + keyword.length)}</mark>
+      {title.slice(index + keyword.length)}
+    </>
+  );
+}
+
+function BookCard({ book, rank, keyword, onSelect, onLike }) {
   const createdAt =
     book.createdAt && !Number.isNaN(Date.parse(book.createdAt))
       ? new Intl.DateTimeFormat("ko-KR", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        }).format(new Date(book.createdAt))
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date(book.createdAt))
       : "날짜 없음";
 
   return (
@@ -28,7 +41,17 @@ function BookCard({ book, rank, onSelect, onLike }) {
           {rank != null && <span className="book-card-rank">{rank}위</span>}
         </span>
         <span className="book-card-content">
-          <strong className="book-card-title">{book.title}</strong>
+          <strong className="book-card-title">
+            {keyword && book.title.includes(keyword) ? (
+              <>
+                {book.title.split(keyword)[0]}
+                <mark>{keyword}</mark>
+                {book.title.slice(book.title.indexOf(keyword) + keyword.length)}
+              </>
+            ) : (
+              book.title
+            )}
+          </strong>
           <span className="book-card-author">{book.author}</span>
           <span className="book-card-meta">
             {[book.category, book.genre].filter(Boolean).join(", ") || "미분류"}
