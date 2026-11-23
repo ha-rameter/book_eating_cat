@@ -406,9 +406,13 @@ textarea {
 }
 
 .book-card-like-slot {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+  padding: 0 12px 12px;
+}
+
+.book-card-like-slot .btn {
+  padding: 3px 10px;
+  font-size: 13px;
+  border-radius: 999px;
 }
 
 .state-box {
@@ -671,4 +675,29 @@ mark {
   display: flex;
   justify-content: center;
   margin-top: 18px;
+}
+
+.site-footer {
+  background: #efece5;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.site-footer-name {
+  color: var(--ink);
+}
+
+.site-footer-inner a {
+  color: var(--primary);
 }
