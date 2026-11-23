@@ -6,7 +6,7 @@ import Footer from "./components/layout/Footer";
 import HomePage from "./components/pages/main/HomePage";
 import BookDetail from "./components/pages/detail/BookDetail";
 import BookForm from "./components/pages/form/BookForm";
-import { createBook, updateBook } from "./api.js";
+import { createBook, deleteBook, updateBook } from "./api.js";
 
 function App() {
   // 화면 전환: home, detail, register, edit
@@ -60,7 +60,14 @@ function App() {
       setNotice({ type: "error", text: "도서 정보를 저장하지 못했어요. 다시 시도해 주세요." });
     }
   }
-  async function handleDelete(id) {} // API-11
+  async function handleDelete(id) {
+    try {
+      await deleteBook(id);
+      goHome();
+    } catch {
+      setNotice({ type: "error", text: "도서를 삭제하지 못했어요. 다시 시도해 주세요." });
+    }
+  }
 
   async function handleLike(book, liked) {
     // API-10

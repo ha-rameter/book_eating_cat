@@ -76,7 +76,13 @@ export async function updateBook(id, changes) {
 }
 
 // API-11 삭제
-export async function deleteBook(id) {}
+export async function deleteBook(id) {
+  const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+
+  if (!res.ok && res.status !== 404) {
+    throw new Error("도서 삭제에 실패했습니다.");
+  }
+}
 
 // API-13 표지 후보 2장 생성, Data URL 배열로 돌려주기
 export async function generateCovers(book) {
