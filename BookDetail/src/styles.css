@@ -1,0 +1,259 @@
+
+.book-detail {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  font-family: Arial, sans-serif;
+  color: #222;
+}
+
+.book-detail * {
+  box-sizing: border-box;
+}
+
+.detail-navigation {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #555;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 26px;
+}
+
+.detail-cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #eeeeee;
+  border: 2px solid #888;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.detail-cover span {
+  padding: 5px 12px;
+  background: white;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+.detail-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover-description {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #777;
+}
+
+.detail-information {
+  min-width: 0;
+}
+
+.detail-information h1 {
+  font-size: 28px;
+  margin: 0 0 12px;
+}
+
+.book-author {
+  margin: 0 0 15px;
+  color: #666;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.tag {
+  border: 1px solid #aaa;
+  background: #f4f4f4;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+.average-rating {
+  color: #da9700;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.rating-count {
+  font-size: 13px;
+  color: #777;
+  font-weight: normal;
+  margin-left: 6px;
+}
+
+.date-row {
+  display: flex;
+  gap: 45px;
+  padding: 14px 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.date-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-label {
+  font-size: 12px;
+  color: #777;
+}
+
+.date-row strong {
+  font-size: 14px;
+}
+
+.detail-content {
+  padding: 20px 0;
+  min-height: 130px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #444;
+}
+
+.rating-panel {
+  border: 2px dashed #bbb;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 1px;
+}
+
+.star {
+  border: none;
+  background: transparent;
+  color: #ccc;
+  font-size: 26px;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.star.active {
+  color: #e0a000;
+}
+
+.rating-message {
+  font-size: 12px;
+  color: #777;
+}
+
+.detail-actions,
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+}
+
+.btn-outline {
+  border: 1px solid #444;
+  color: #222;
+}
+
+.btn-like,
+.btn-danger {
+  border: 1px solid #c63830;
+  color: #c63830;
+}
+
+.btn-like.liked {
+  background: #c63830;
+  color: white;
+}
+
+.btn-danger-fill {
+  background: #c63830;
+  border: 1px solid #c63830;
+  color: white;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.delete-modal {
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.delete-modal h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.delete-modal p {
+  color: #777;
+  font-size: 14px;
+}
+
+.modal-actions {
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+@media (max-width: 650px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cover-column {
+    max-width: 230px;
+  }
+
+  .detail-information h1 {
+    font-size: 24px;
+  }
+
+  .date-row {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}
