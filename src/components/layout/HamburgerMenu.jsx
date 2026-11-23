@@ -1,9 +1,14 @@
-import { useEffect, useRef } from 'react';
-import { SERVICE_NAME } from '../../constants';
+import { useEffect, useRef, useState } from 'react';
+import { GITHUB_URL, SERVICE_NAME } from '../../constants';
+import ServiceGuideModal from './ServiceGuideModal';
 
 function HamburgerMenu({ open, current, onClose, onNavigate }) {
   const panelRef = useRef(null);
   const closeRef = useRef(null);
+  const helpTimerRef = useRef(null);
+  const [helpOpen, setHelpOpen] = useState(false);
+
+  useEffect(() => () => window.clearTimeout(helpTimerRef.current), []);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -26,7 +31,7 @@ function HamburgerMenu({ open, current, onClose, onNavigate }) {
       }
 
       if (event.key !== 'Tab') return;
-      const items = [...panelRef.current.querySelectorAll('button:not(:disabled)')];
+      const items = [...panelRef.current.querySelectorAll('button:not(:disabled), a[href]')];
       const first = items[0];
       const last = items[items.length - 1];
       if (event.shiftKey && document.activeElement === first) {
@@ -52,7 +57,14 @@ function HamburgerMenu({ open, current, onClose, onNavigate }) {
     onClose();
   }
 
+  function openHelp() {
+    onClose();
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    helpTimerRef.current = window.setTimeout(() => setHelpOpen(true), reducedMotion ? 0 : 260);
+  }
+
   return (
+    <>
     <div className={`side-menu-root${open ? ' is-open' : ''}`} aria-hidden={!open} inert={!open}>
       <button className="side-menu-backdrop" type="button" onClick={onClose} aria-label="메뉴 닫기" tabIndex={-1} />
       <aside className="side-menu" ref={panelRef} role="dialog" aria-modal="true" aria-label="전체 메뉴">
@@ -67,9 +79,15 @@ function HamburgerMenu({ open, current, onClose, onNavigate }) {
           <button className={`side-menu-link${current === 'register' ? ' is-current' : ''}`} type="button" aria-current={current === 'register' ? 'page' : undefined} onClick={() => navigate('register')}>
             새 도서 등록
           </button>
+          <button className="side-menu-link" type="button" onClick={openHelp}>이용 안내</button>
         </nav>
+        <a className="side-menu-github" href={GITHUB_URL} target="_blank" rel="noopener noreferrer" onClick={onClose}>
+          GitHub 저장소 <span aria-hidden="true">↗</span>
+        </a>
       </aside>
     </div>
+    {helpOpen && <ServiceGuideModal onClose={() => setHelpOpen(false)} />}
+    </>
   );
 }
 
