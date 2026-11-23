@@ -55,15 +55,21 @@ function BookCard({ book, rank, keyword, onSelect, onLike }) {
           <span className="book-card-author">{book.author}</span>
           <span className="book-card-meta">
             {[book.category, book.genre].filter(Boolean).join(", ") || "미분류"}
+          </span>
+          <span className="book-card-stats">
             <span className="book-card-rating">
               <span aria-hidden="true">★</span>{" "}
               {Number(book.review || 0).toFixed(1)} ({book.reviewCount || 0})
             </span>
+            {rank != null && (
+              <span className="book-card-likes">
+                <span aria-hidden="true">♥</span> {book.likeCount || 0}
+              </span>
+            )}
           </span>
           <span className="book-card-date">등록일 {createdAt}</span>
         </span>
       </button>
-      {/* 라이크 버튼용 빈 구역_승현님 파이팅팅팅 */}
       {onLike && <div className="book-card-like-slot" />}
     </article>
   );

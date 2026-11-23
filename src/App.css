@@ -388,10 +388,16 @@ textarea {
   font-size: 12.5px;
 }
 
-.book-card-meta {
+.book-card-stats {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+}
+
+.book-card-likes {
+  color: var(--like);
+  font-weight: 600;
 }
 
 .book-card-rating {
