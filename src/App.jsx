@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { books } from '../db.json'; // 수정 폼 확인용 데이터
 import './App.css';
 import Header from './components/layout/Header';
 import HamburgerMenu from './components/layout/HamburgerMenu';
@@ -64,7 +65,12 @@ function App() {
         {page === 'register' && <BookForm mode="register" onSubmit={handleCreate} onCancel={goHome} />}
 
         {page === 'edit' && (
-          <BookForm mode="edit" onSubmit={(changes) => handleUpdate(selectedId, changes)} onCancel={() => goDetail(selectedId)} />
+          <BookForm
+            mode="edit"
+            initialBook={books.find((book) => book.id === selectedId)}
+            onSubmit={(changes) => handleUpdate(selectedId, changes)}
+            onCancel={() => goDetail(selectedId)}
+          />
         )}
       </main>
 
