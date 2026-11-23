@@ -11,6 +11,8 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [rating, setRating] = useState(0);
+  const [rated, setRated] = useState(false); // KJG - 별점을 이미 줬는지
+  const [rateSaving, setRateSaving] = useState(false); // KJG - 별점 저장 중
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
@@ -21,6 +23,7 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
       setError('');
       setBook(null);
       setRating(0);
+      setRated(false); // KJG - 별점 주었는지 확인
       setShowDeleteModal(false);
 
       try {
@@ -30,8 +33,10 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
           setBook(data);
         }
       } catch (err) {
+        console.error('도서 상세 불러오기 실패', err); // KJG - 개발자용은 콘솔로
+        
         if (active) {
-          setError(err.message);
+          setError('도서 정보를 불러오지 못했어요. 목록에서 다시 선택해 주세요.'); // 사용자에게 보여지는 에러
         }
       } finally {
         if (active) {
@@ -42,7 +47,8 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
 
     if (bookId === null || bookId === undefined) {
       setBook(null);
-      setError('도서 ID가 없습니다.');
+      // setError('도서 ID가 없습니다.');
+      setError('도서 정보를 찾을 수 없어요. 목록에서 다시 선택해 주세요.'); // 수정
       setLoading(false);
     } else {
       loadBook();
@@ -76,9 +82,30 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
   };
 
   // 별점 선택 및 상위 콜백 호출
+  // const handleRating = (score) => {
+  //   setRating(score);
+  //   onRate?.(book, score);
+  // };
+  // KJG - 별을 누르면 고르기만 하고 저장은 하지 않음
   const handleRating = (score) => {
+    if (rated) return;
     setRating(score);
-    onRate?.(book, score);
+  };
+
+  // KJG - 별점 주기 버튼을 눌렀을 때 한 번만 저장하고, 새 평균으로 화면 갱신
+  const handleRateSubmit = async () => {
+    if (!book || !onRate || rating === 0 || rated) return;
+
+    setRateSaving(true);
+    try {
+      const updatedBook = await onRate(book, rating);
+      if (updatedBook) {
+        setBook(updatedBook);
+        setRated(true);
+      }
+    } finally {
+      setRateSaving(false);
+    }
   };
 
   const handleDeleteConfirm = () => {
@@ -90,9 +117,20 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
     return <div className="detail">도서 정보를 불러오는 중입니다...</div>;
   }
 
+  // if (error) {
+  //   return <div className="detail">오류: {error}</div>;
+  // }
+  // KJG - 돌아가기버튼 추가
   if (error) {
-    return <div className="detail">오류: {error}</div>;
-  }
+  return (
+    <div className="detail">
+      <p>{error}</p>
+      <button type="button" className="btn detail-outline" onClick={onBack}>
+        목록으로 돌아가기
+      </button>
+    </div>
+  );
+}
 
   if (!book) {
     return <div className="detail">도서 정보가 없습니다.</div>;
@@ -123,7 +161,7 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
                 alt={`${book.title} 표지`}
               />
             ) : (
-              <span>AI 표지</span>
+              <span>표지 없음</span>
             )}
           </div>
 
@@ -137,8 +175,8 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
           <p className="book-author">{book.author}</p>
 
           <div className="detail-meta">
-            <span className="detail-tag">{book.category}</span>
-            <span className="detail-tag">{book.genre}</span>
+            {book.category && <span className="detail-tag">{book.category}</span>}
+            {book.genre && <span className="detail-tag">{book.genre}</span>}
 
             <StarRating
               value={book.review ?? 0}
@@ -169,12 +207,25 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
               value={rating}
               onChange={handleRating}
             />
+{/* KJG - 별점 추가 */}
+            <div className="rating-row">
+              <span className="rating-message">
+                {rated
+                  ? `내 별점 ${rating}점, 평가해 주셔서 고마워요`
+                  : rating === 0
+                    ? '별을 눌러 고른 뒤 별점 주기를 눌러 주세요'
+                    : `내 별점 ${rating}점`}
+              </span>
 
-            <span className="rating-message">
-              {rating === 0
-                ? '별을 눌러 평가해 주세요'
-                : `내 별점 ${rating}점`}
-            </span>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleRateSubmit}
+                disabled={rating === 0 || rated || rateSaving}
+              >
+                {rated ? '평가 완료' : rateSaving ? '저장 중...' : '별점 주기'}
+              </button>
+            </div>
           </div>
 
           <div className="detail-actions">
