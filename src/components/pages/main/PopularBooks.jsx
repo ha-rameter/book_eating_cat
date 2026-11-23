@@ -45,7 +45,7 @@ function PopularBooks({ onSelect, reloadKey }) {
 
       {loading && <StateBox type="loading" message="인기 도서를 불러오는 중이에요..." />}
       {!loading && error && <StateBox type="error" message={error} />}
-      {!loading && !error && popular.length === 0 && <StateBox type="empty" message="아직 인기 도서가 없어요." />}
+      {!loading && !error && popular.length === 0 && <StateBox type="empty" message="아직 산책길이 조용해요. 첫 책을 꽂아 주세요." />}
 
       {!loading && !error && popular.length > 0 && (
         <div className="carousel">

@@ -8,6 +8,15 @@ import CategoryFilter from './CategoryFilter';
 import BookList from './BookList';
 import StateBox from './StateBox';
 
+// 시간대에 따라 바뀌는 인사
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 11) return '맑은 아침, 어떤 이야기와 산책할까요?';
+  if (hour >= 11 && hour < 17) return '나른한 오후, 짧은 이야기 한 편 어때요?';
+  if (hour >= 17 && hour < 21) return '노을 지는 저녁, 천천히 걸어 볼 책을 골라 보세요.';
+  return '늦은 밤, 오늘을 정리할 책 한 권 어때요?';
+}
+
 function HomePage({ onSelect, onRegister, onLike }) {
   const [searchType, setSearchType] = useState('title');
   const [keyword, setKeyword] = useState('');
@@ -57,6 +66,7 @@ function HomePage({ onSelect, onRegister, onLike }) {
 
   return (
     <>
+      <p className="home-greeting">{getGreeting()}</p>
       <SearchBar onSearch={handleSearch} onReset={handleReset} />
 
       {searching && <StateBox type="loading" message="검색하는 중이에요..." />}

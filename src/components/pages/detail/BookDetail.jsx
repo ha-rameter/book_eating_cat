@@ -5,6 +5,17 @@ import LikeButton from './LikeButton.jsx';
 import StarRating from './StarRating.jsx';
 import './BookDetail.css';
 
+// 별점마다 붙는 한 줄
+const RATING_LABELS = ['', '아쉬웠어요', '그저 그랬어요', '괜찮았어요', '좋았어요', '인생 책이에요'];
+
+// 내용의 첫 문장 (인용구로 크게 보여 줌)
+function getFirstSentence(text) {
+  if (!text) return '';
+  const end = text.search(/[.!?]/);
+  const sentence = end === -1 ? text : text.slice(0, end + 1);
+  return sentence.length > 60 ? `${sentence.slice(0, 60)}...` : sentence;
+}
+
 // 도서 상세 화면 (API-07)
 function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
   const [book, setBook] = useState(null);
@@ -196,12 +207,16 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
             </div>
           </div>
 
+          {book.contents && (
+            <blockquote className="detail-quote">{getFirstSentence(book.contents)}</blockquote>
+          )}
+
           <div className="detail-content">
             {book.contents || '등록된 내용이 없습니다.'}
           </div>
 
           <div className="rating-panel">
-            <strong>이 책 어땠나요?</strong>
+            <strong>이 책과의 산책은 어땠나요?</strong>
 
             <StarRating
               value={rating}
@@ -211,10 +226,10 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
             <div className="rating-row">
               <span className="rating-message">
                 {rated
-                  ? `내 별점 ${rating}점, 평가해 주셔서 고마워요`
+                  ? `${RATING_LABELS[rating]}, 남겨 주신 마음 고마워요`
                   : rating === 0
-                    ? '별을 눌러 고른 뒤 별점 주기를 눌러 주세요'
-                    : `내 별점 ${rating}점`}
+                    ? '별을 눌러 마음을 남겨 주세요'
+                    : `${rating}점, ${RATING_LABELS[rating]}`}
               </span>
 
               <button

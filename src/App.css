@@ -1019,3 +1019,12 @@ h3,
     transition: none;
   }
 }
+/* 시간대 인사 */
+.home-greeting {
+  margin: 8px 0 20px;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
