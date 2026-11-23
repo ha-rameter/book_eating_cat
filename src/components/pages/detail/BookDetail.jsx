@@ -13,7 +13,6 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
   const [rating, setRating] = useState(0);
   const [rated, setRated] = useState(false); // KJG - 별점을 이미 줬는지
   const [rateSaving, setRateSaving] = useState(false); // KJG - 별점 저장 중
-  const [rateEffectId, setRateEffectId] = useState(0);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
@@ -103,7 +102,6 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
       if (updatedBook) {
         setBook(updatedBook);
         setRated(true);
-        setRateEffectId((prev) => prev + 1);
       }
     } finally {
       setRateSaving(false);
@@ -221,7 +219,7 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
               </span>
 
               
-            <div className="rating-submit-wrap">
+            
               <button
                 type="button"
                 className="btn btn-primary"
@@ -231,16 +229,6 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
                 {rated ? '평가 완료' : rateSaving ? '저장 중...' : '별점 주기'}
               </button>
 
-              {rateEffectId > 0 && (
-                <span
-                  key={rateEffectId}
-                  className="rating-submit-effect"
-                  aria-hidden="true"
-                >
-                  ⭐
-                </span>
-              )}
-            </div>
 
             </div>
           </div>
