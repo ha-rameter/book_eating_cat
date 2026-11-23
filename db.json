@@ -12,7 +12,7 @@
       "review": 4.3,
       "reviewCount": 15,
       "createdAt": "2026-11-17T09:00:00.000Z",
-      "updatedAt": "2026-11-17T09:00:00.000Z"
+      "updatedAt": "2026-11-23T07:49:20.546Z"
     },
     {
       "id": 2,
@@ -22,11 +22,11 @@
       "genre": "판타지",
       "category": "소설/시",
       "coverImageUrl": "",
-      "likeCount": 42,
+      "likeCount": 43,
       "review": 4.8,
       "reviewCount": 30,
       "createdAt": "2026-11-20T02:00:00.000Z",
-      "updatedAt": "2026-11-20T02:00:00.000Z"
+      "updatedAt": "2026-11-23T07:31:23.701Z"
     },
     {
       "id": 3,
@@ -64,11 +64,11 @@
       "genre": "판타지",
       "category": "소설/시",
       "coverImageUrl": "",
-      "likeCount": 31,
+      "likeCount": 34,
       "review": 4.1,
       "reviewCount": 18,
       "createdAt": "2026-11-18T03:00:00.000Z",
-      "updatedAt": "2026-11-18T03:00:00.000Z"
+      "updatedAt": "2026-11-23T07:54:06.972Z"
     },
     {
       "id": 6,
@@ -121,7 +121,7 @@
       "category": "실용/예술/취미",
       "coverImageUrl": "",
       "likeCount": 14,
-      "review": 4.0,
+      "review": 4,
       "reviewCount": 6,
       "createdAt": "2026-11-19T01:00:00.000Z",
       "updatedAt": "2026-11-19T01:00:00.000Z"
@@ -134,11 +134,11 @@
       "genre": "프로그래밍",
       "category": "과학/IT",
       "coverImageUrl": "",
-      "likeCount": 27,
+      "likeCount": 28,
       "review": 4.6,
       "reviewCount": 22,
       "createdAt": "2026-11-15T09:00:00.000Z",
-      "updatedAt": "2026-11-15T09:00:00.000Z"
+      "updatedAt": "2026-11-23T07:43:31.985Z"
     },
     {
       "id": 11,
@@ -166,7 +166,7 @@
       "review": 4.4,
       "reviewCount": 11,
       "createdAt": "2026-11-13T09:00:00.000Z",
-      "updatedAt": "2026-11-13T09:00:00.000Z"
+      "updatedAt": "2026-11-23T07:43:45.305Z"
     }
   ]
 }

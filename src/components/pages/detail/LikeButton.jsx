@@ -49,7 +49,7 @@ function LikeButton({ likeCount, onLike }) {
           className="like-pop-effect"
           aria-hidden="true"
         >
-          <span className="like-pop-thumb">👍</span>
+          <span className="like-pop-thumb">❤️</span>
           <span className="like-pop-spark like-pop-spark-1">✦</span>
           <span className="like-pop-spark like-pop-spark-2">✦</span>
           <span className="like-pop-spark like-pop-spark-3">✦</span>

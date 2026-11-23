@@ -16,7 +16,31 @@ export const COVER_SETTINGS = {
 // fetch는 404, 500에도 에러를 던지지 않으니 res.ok 확인 후 throw
 
 // API-01 인기 도서 10권
-export async function getPopularBooks() {}
+
+export async function getPopularBooks() {
+  const response = await fetch(API_URL);
+
+  if (!response.ok) {
+    throw new Error("인기 도서를 불러오지 못했습니다.");
+  }
+
+  const books = await response.json();
+
+  return books
+    .sort((a, b) => {
+      if (b.likeCount !== a.likeCount) {
+        return b.likeCount - a.likeCount;
+      }
+
+      if (b.review !== a.review) {
+        return b.review - a.review;
+      }
+
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    })
+    .slice(0, 10);
+}
+
 
 // API-02, 05, 06 최신 등록순 5권씩 (구분, 장르 조건), X-Total-Count로 전체 권수
 export async function getLatestBooks(page, category, genre) {}
