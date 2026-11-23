@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CATEGORIES, CATEGORY_GENRES, LIMITS } from '../../../constants';
 import CoverPicker from './CoverPicker';
+import './BookForm.css';
 
 // 제목, 저자, 내용에서 앞뒤 공백을 뺀 뒤 항목별로 오류 문구를 모은다.
 function validate(form) {
@@ -87,48 +88,64 @@ function BookForm({ mode, initialBook, onSubmit, onCancel }) {
     };
 
     return (
-      <p>
-        <label htmlFor={id}>{label} (필수{min > 1 && `, ${min}자 이상`})</label><br />
-        {name === 'contents' ? <textarea {...inputProps} rows={5} /> : <input {...inputProps} />}{' '}
-        <small id={`${id}-count`}>{form[name].length} / {max}자</small>
-        {error && <span id={`${id}-error`} role="alert"><br />{error}</span>}
-      </p>
+      <div className="book-form-field">
+        <label htmlFor={id}>
+          {label}{' '}
+          <span className="book-form-required">(필수{min > 1 && `, ${min}자 이상`})</span>
+        </label>
+        {name === 'contents' ? <textarea {...inputProps} rows={5} /> : <input {...inputProps} />}
+        <div className="book-form-field-notes">
+          {error && <small className="book-form-error" id={`${id}-error`} role="alert">{error}</small>}
+          <small className="book-form-count" id={`${id}-count`}>{form[name].length} / {max}자</small>
+        </div>
+      </div>
     );
   }
 
   // noValidate로 기본 검사 팝업을 끄고 입력칸 아래에 오류 문구를 보여 준다.
   return (
-    <form className="form" onSubmit={handleSubmit} noValidate>
-      <h1>{editing ? '도서 정보 수정' : '새 도서 등록'}</h1>
-      {renderTextField('title', '별빛 아래의 서점')}
-      {renderTextField('author', '홍길동')}
-      <p>
-        <label htmlFor="book-category">구분 (선택)</label><br />
-        <select id="book-category" name="category" value={form.category} onChange={handleChange}>
-          <option value="">선택 안 함</option>
-          {CATEGORIES.map((category) => <option key={category}>{category}</option>)}
-        </select>
-      </p>
-      <p>
-        <label htmlFor="book-genre">장르 (선택)</label><br />
-        <select
-          id="book-genre"
-          name="genre"
-          value={form.genre}
-          onChange={handleChange}
-          disabled={!form.category}
-        >
-          <option value="">{form.category ? '선택 안 함' : '구분을 먼저 선택해 주세요'}</option>
-          {genres.map((genre) => <option key={genre}>{genre}</option>)}
-        </select>
-      </p>
-      {renderTextField('contents', '책의 내용과 분위기를 적어 주세요.')}
-      <CoverPicker
-        book={form}
-        onSelect={(coverImageUrl) => setForm((current) => ({ ...current, coverImageUrl }))}
-      />
-      <button type="button" className="btn" onClick={onCancel}>취소</button>{' '}
-      <button type="submit" className="btn btn-primary">{editing ? '저장' : '등록'}</button>
+    <form className="book-form" onSubmit={handleSubmit} noValidate>
+      <div className="book-form-heading">
+        <h1>{editing ? '도서 정보 수정' : '새 도서 등록'}</h1>
+        <p>도서 내용은 AI 표지를 만들 때 사용돼요.</p>
+      </div>
+      <div className="book-form-layout">
+        <div className="book-form-fields">
+          {renderTextField('title', '별빛 아래의 서점')}
+          {renderTextField('author', '홍길동')}
+          <div className="book-form-select-row">
+            <div className="book-form-field">
+              <label htmlFor="book-category">구분 <span className="book-form-optional">(선택)</span></label>
+              <select id="book-category" name="category" value={form.category} onChange={handleChange}>
+                <option value="">선택 안 함</option>
+                {CATEGORIES.map((category) => <option key={category}>{category}</option>)}
+              </select>
+            </div>
+            <div className="book-form-field">
+              <label htmlFor="book-genre">장르 <span className="book-form-optional">(선택)</span></label>
+              <select
+                id="book-genre"
+                name="genre"
+                value={form.genre}
+                onChange={handleChange}
+                disabled={!form.category}
+              >
+                <option value="">{form.category ? '선택 안 함' : '구분을 먼저 선택해 주세요'}</option>
+                {genres.map((genre) => <option key={genre}>{genre}</option>)}
+              </select>
+            </div>
+          </div>
+          {renderTextField('contents', '책의 내용과 분위기를 적어 주세요.')}
+        </div>
+        <CoverPicker
+          book={form}
+          onSelect={(coverImageUrl) => setForm((current) => ({ ...current, coverImageUrl }))}
+        />
+      </div>
+      <div className="book-form-actions">
+        <button type="button" className="btn" onClick={onCancel}>취소</button>
+        <button type="submit" className="btn btn-primary">{editing ? '저장' : '등록'}</button>
+      </div>
     </form>
   );
 }
