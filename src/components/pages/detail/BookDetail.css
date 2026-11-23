@@ -263,3 +263,151 @@
     font-size: 25px;
   }
 }
+
+
+/* ================================
+   좋아요 팝업 애니메이션
+================================ */
+
+.like-btn {
+  position: relative;
+  display: inline-flex;
+}
+
+.like-pop-effect {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 2;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.like-pop-thumb {
+  position: absolute;
+  font-size: 44px;
+  line-height: 1;
+  transform-origin: center;
+  animation: like-thumb-pop 700ms ease-out both;
+}
+
+.like-pop-spark {
+  position: absolute;
+  font-size: 18px;
+  color: #f6bb42;
+  animation: like-spark-pop 700ms ease-out both;
+}
+
+.like-pop-spark-1 {
+  --spark-x: -52px;
+  --spark-y: -55px;
+}
+
+.like-pop-spark-2 {
+  --spark-x: 30px;
+  --spark-y: -67px;
+}
+
+.like-pop-spark-3 {
+  --spark-x: 54px;
+  --spark-y: -30px;
+}
+
+@keyframes like-thumb-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -25%) scale(0.35) rotate(-18deg);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1.35) rotate(8deg);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translate(-50%, -125%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -170%) scale(0.85);
+  }
+}
+
+@keyframes like-spark-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20px) scale(0.4);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(var(--spark-x), var(--spark-y))
+      scale(0.8);
+  }
+}
+
+/* ================================
+   별점 클릭 애니메이션
+================================ */
+
+.detail-star {
+  position: relative;
+  overflow: visible;
+}
+
+.detail-star-glyph {
+  display: inline-block;
+}
+
+.star-click-effect {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: var(--star);
+  font-size: 23px;
+  pointer-events: none;
+  animation: star-click-burst 650ms ease-out both;
+}
+
+@keyframes star-click-burst {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.2)
+      rotate(-40deg);
+  }
+
+  40% {
+    opacity: 1;
+    transform:
+      translate(-50%, -100%)
+      scale(1.5)
+      rotate(25deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -180%)
+      scale(0.6)
+      rotate(70deg);
+  }
+}
+
+/* 애니메이션 최소화 설정 */
+@media (prefers-reduced-motion: reduce) {
+  .like-pop-thumb,
+  .like-pop-spark,
+  .star-click-effect {
+    animation-duration: 0.01ms;
+  }
+}

@@ -206,6 +206,7 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
             <StarRating
               value={rating}
               onChange={handleRating}
+              disabled={rated || rateSaving}
             />
 {/* KJG - 별점 추가 */}
             <div className="rating-row">
