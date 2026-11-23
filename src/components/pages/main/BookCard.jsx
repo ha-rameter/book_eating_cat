@@ -1,3 +1,5 @@
+import LikeButton from '../detail/LikeButton';
+
 function highlight(title, keyword) {
   if (!keyword) return title;
   const index = title.toLowerCase().indexOf(keyword.toLowerCase());
@@ -70,7 +72,11 @@ function BookCard({ book, rank, keyword, onSelect, onLike }) {
           <span className="book-card-date">등록일 {createdAt}</span>
         </span>
       </button>
-      {onLike && <div className="book-card-like-slot" />}
+      {onLike && (
+        <div className="book-card-like-slot">
+          <LikeButton likeCount={book.likeCount || 0} onLike={(liked) => onLike(book, liked)} />
+        </div>
+      )}
     </article>
   );
 }
