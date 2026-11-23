@@ -212,3 +212,8 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.book-form-field [data-changed='true'] {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
