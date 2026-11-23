@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer';
 import HomePage from './components/pages/main/HomePage';
 import BookDetail from './components/pages/detail/BookDetail';
 import BookForm from './components/pages/form/BookForm';
+import { updateBook } from './api.js';
 
 function App() {
   // 화면 전환: home, detail, register, edit
@@ -38,7 +39,19 @@ function App() {
   async function handleCreate(form) {} // API-08
   async function handleUpdate(id, changes) {} // API-09
   async function handleDelete(id) {} // API-11
-  async function handleLike(book, liked) {} // API-10
+  
+  async function handleLike(book, liked) { // API-10
+    const nextLikeCount = Math.max(
+      0,
+      (book.likeCount ?? 0) + (liked ? 1 : -1)
+    );
+
+    return await updateBook(book.id, {
+      likeCount: nextLikeCount,
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
   async function handleRate(book, score) {} // API-15
 
   return (

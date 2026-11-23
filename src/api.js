@@ -24,13 +24,37 @@ export async function getLatestBooks(page, category, genre) {}
 export async function searchBooks(type, keyword) {}
 
 // API-07 상세
-export async function getBook(id) {}
+
+export async function getBook(id) {
+  const response = await fetch(`${API_URL}/${id}`);
+
+  if (!response.ok) {
+    throw new Error('도서 정보를 불러오지 못했습니다.');
+  }
+
+  return await response.json();
+}
+
 
 // API-08 등록
 export async function createBook(book) {}
 
 // API-09 수정, API-10 좋아요, API-15 별점 주기 (바뀐 필드만 PATCH)
-export async function updateBook(id, changes) {}
+export async function updateBook(id, changes) {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(changes),
+  });
+
+  if (!res.ok) {
+    throw new Error('도서 정보 수정에 실패했습니다.');
+  }
+
+  return await res.json();
+}
 
 // API-11 삭제
 export async function deleteBook(id) {}
