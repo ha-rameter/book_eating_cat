@@ -35,8 +35,31 @@ export async function getBook(id) {
   return await response.json();
 }
 
-// API-08 등록
-export async function createBook(book) {}
+
+ // API-08 등록
+export async function createBook(book) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...book,
+      likeCount: 0,
+      review: 0,
+      reviewCount: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("도서 등록에 실패했습니다.");
+  }
+
+  return await response.json();
+}
+
 
 // API-09 수정, API-10 좋아요, API-15 별점 주기 (바뀐 필드만 PATCH)
 export async function updateBook(id, changes) {
@@ -56,7 +79,18 @@ export async function updateBook(id, changes) {
 }
 
 // API-11 삭제
-export async function deleteBook(id) {}
+export async function deleteBook(id) {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("도서 삭제에 실패했습니다.");
+  }
+
+  return true;
+}
+
 
 // API-13 표지 후보 2장 생성, Data URL 배열로 돌려주기
 export async function generateCovers(book) {
