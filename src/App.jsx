@@ -25,6 +25,7 @@ function App() {
   function goDetail(id) {
     setSelectedId(id);
     setEditingBook(null);
+    setNotice(null);
     setPage("detail");
   }
 
@@ -41,7 +42,16 @@ function App() {
 
   // 처리 함수 자리 (API 설계서 번호)
   async function handleCreate(form) {} // API-08
-  async function handleUpdate(id, changes) {} // API-09
+  async function handleUpdate(id, changes) {
+    try {
+      if (Object.keys(changes).length > 0) {
+        await updateBook(id, { ...changes, updatedAt: new Date().toISOString() });
+      }
+      goDetail(id);
+    } catch {
+      setNotice({ type: "error", text: "도서 정보를 저장하지 못했어요. 다시 시도해 주세요." });
+    }
+  }
   async function handleDelete(id) {} // API-11
 
   async function handleLike(book, liked) {
