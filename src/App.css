@@ -1,4 +1,4 @@
-/* 색상 변수 (디자인 규칙, 컨셉: 오래된 동네 책방). 모든 컴포넌트가 같이 사용 */
+/* 색상 변수, 모든 컴포넌트가 같이 사용 */
 :root {
   --bg: #f6f4ef;
   --surface: #ffffff;
@@ -50,7 +50,6 @@ textarea {
   padding: 24px 20px 56px;
 }
 
-/* 버튼 규칙: 주요는 초록, 일반은 흰색, 위험은 빨간색 */
 .btn {
   border: 1px solid var(--line);
   background: var(--surface);
@@ -83,7 +82,6 @@ textarea {
   border-color: #efc6c2;
 }
 
-/* 알림 */
 .notice {
   position: fixed;
   top: 76px;
@@ -105,4 +103,308 @@ textarea {
   color: var(--danger);
 }
 
-/* 각 컴포넌트 스타일은 아래에 이어서 작성 */
+.book-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.book-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.book-card-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 0;
+  background: none;
+  padding: 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.book-card-cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  background: var(--primary-soft);
+}
+
+.book-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.book-card-no-cover {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 13px;
+  background: repeating-linear-gradient(135deg, var(--primary-soft), var(--primary-soft) 10px, #dbe6de 10px, #dbe6de 20px);
+}
+
+.book-card-rank {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 6px;
+}
+
+.book-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px 12px;
+}
+
+.book-card-title {
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+
+.book-card-author,
+.book-card-meta,
+.book-card-date {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.book-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.book-card-rating {
+  color: var(--star);
+  font-weight: 600;
+}
+
+.book-card-like-slot {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.state-box {
+  background: var(--surface);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 36px 20px;
+  text-align: center;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.state-box p {
+  margin: 0;
+}
+
+.state-error {
+  color: var(--danger);
+  border-color: #efc6c2;
+  background: var(--danger-soft);
+}
+
+.state-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn:hover {
+  background: var(--bg);
+}
+
+.btn-primary:hover {
+  background: #233a2d;
+}
+
+.input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.input-error {
+  border-color: var(--danger);
+}
+
+.field-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin: 6px 0 0;
+}
+
+.search {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 28px;
+}
+
+.search-row {
+  display: flex;
+  gap: 8px;
+}
+
+.search-type {
+  width: 110px;
+}
+
+.search-input {
+  flex: 1;
+}
+
+.section {
+  margin-bottom: 36px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.section-title small {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.section-title .count {
+  color: var(--primary);
+}
+
+.section-sub {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+mark {
+  background: #ffe58a;
+  padding: 0 1px;
+}
+
+.filter {
+  margin-bottom: 16px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  padding: 9px 12px;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: var(--ink);
+}
+
+.tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 5px 14px;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: var(--bg);
+}
+
+.chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+@media (max-width: 560px) {
+  .search-row {
+    flex-wrap: wrap;
+  }
+
+  .search-type {
+    width: 100%;
+  }
+}
