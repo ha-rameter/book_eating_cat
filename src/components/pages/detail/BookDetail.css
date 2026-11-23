@@ -303,8 +303,9 @@
   margin: 0 0 22px;
   padding: 4px 0 4px 18px;
   border-left: 2px solid var(--ink);
-  font-family: var(--serif);
-  font-size: 22px;
-  line-height: 1.6;
+  font-family: 'Nanum Pen Script', var(--serif);
+  font-size: 32px;
+  line-height: 1.4;
+  word-break: keep-all;
   color: var(--ink);
 }
