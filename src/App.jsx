@@ -7,12 +7,12 @@ import HomePage from "./components/pages/main/HomePage";
 import BookDetail from "./components/pages/detail/BookDetail";
 import BookForm from "./components/pages/form/BookForm";
 import { updateBook } from "./api.js";
-import { books } from "../db.json"; // 수정 폼 확인용 데이터
 
 function App() {
   // 화면 전환: home, detail, register, edit
   const [page, setPage] = useState("home");
   const [selectedId, setSelectedId] = useState(null);
+  const [editingBook, setEditingBook] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   // 성공, 실패 알림 { type: 'success' 또는 'error', text }
   const [notice, setNotice] = useState(null);
@@ -24,6 +24,7 @@ function App() {
 
   function goDetail(id) {
     setSelectedId(id);
+    setEditingBook(null);
     setPage("detail");
   }
 
@@ -31,8 +32,10 @@ function App() {
     setPage("register");
   }
 
-  function goEdit(id) {
+  // 상세 화면에서 읽어 온 책을 수정 폼의 초기값으로 사용한다.
+  function goEdit(id, book) {
     setSelectedId(id);
+    setEditingBook(book);
     setPage("edit");
   }
 
@@ -97,6 +100,7 @@ function App() {
         {page === "edit" && (
           <BookForm
             mode="edit"
+            initialBook={editingBook}
             onSubmit={(changes) => handleUpdate(selectedId, changes)}
             onCancel={() => goDetail(selectedId)}
           />

@@ -238,7 +238,7 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
             <button
               type="button"
               className="btn detail-outline"
-              onClick={() => onEdit?.(book.id)}
+              onClick={() => onEdit?.(book.id, book)}
             >
               수정
             </button>
