@@ -16,13 +16,45 @@ export const COVER_SETTINGS = {
 // fetch는 404, 500에도 에러를 던지지 않으니 res.ok 확인 후 throw
 
 // API-01 인기 도서 10권
-export async function getPopularBooks() {}
+export async function getPopularBooks() {
+  const res = await fetch(
+    `${API_URL}?_sort=likeCount,review,createdAt&_order=desc,desc,desc&_limit=10`,
+  );
+  if (!res.ok) {
+    throw new Error("인기 도서를 불러오지 못했습니다.");
+  }
+  return await res.json();
+}
 
 // API-02, 05, 06 최신 등록순 5권씩 (구분, 장르 조건), X-Total-Count로 전체 권수
-export async function getLatestBooks(page, category, genre) {}
+export async function getLatestBooks(page, category, genre) {
+  let url = `${API_URL}?_sort=createdAt&_order=desc&_page=${page}&_limit=5`;
+  if (category !== "") {
+    url = url + `&category=${encodeURIComponent(category)}`;
+  }
+  if (genre !== "") {
+    url = url + `&genre=${encodeURIComponent(genre)}`;
+  }
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error("도서 목록을 불러오지 못했습니다.");
+  }
+  const books = await res.json();
+  const total = Number(res.headers.get("X-Total-Count"));
+  return { books: books, total: total };
+}
 
 // API-03, 04 제목 또는 저자 검색
-export async function searchBooks(type, keyword) {}
+export async function searchBooks(type, keyword) {
+  const field = type === "author" ? "author_like" : "title_like";
+  const res = await fetch(
+    `${API_URL}?${field}=${encodeURIComponent(keyword)}&_sort=likeCount,createdAt&_order=desc,desc`,
+  );
+  if (!res.ok) {
+    throw new Error("검색하지 못했습니다.");
+  }
+  return await res.json();
+}
 
 // API-07 상세
 export async function getBook(id) {
