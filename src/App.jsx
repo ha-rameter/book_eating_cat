@@ -7,12 +7,12 @@ import HomePage from "./components/pages/main/HomePage";
 import BookDetail from "./components/pages/detail/BookDetail";
 import BookForm from "./components/pages/form/BookForm";
 import { updateBook } from "./api.js";
-import { books } from "../db.json"; // 수정 폼 확인용 데이터
 
 function App() {
   // 화면 전환: home, detail, register, edit
   const [page, setPage] = useState("home");
   const [selectedId, setSelectedId] = useState(null);
+  const [editingBook, setEditingBook] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   // 성공, 실패 알림 { type: 'success' 또는 'error', text }
   const [notice, setNotice] = useState(null);
@@ -24,6 +24,8 @@ function App() {
 
   function goDetail(id) {
     setSelectedId(id);
+    setEditingBook(null);
+    setNotice(null);
     setPage("detail");
   }
 
@@ -31,14 +33,25 @@ function App() {
     setPage("register");
   }
 
-  function goEdit(id) {
+  // 상세 화면에서 읽어 온 책을 수정 폼의 초기값으로 사용한다.
+  function goEdit(id, book) {
     setSelectedId(id);
+    setEditingBook(book);
     setPage("edit");
   }
 
   // 처리 함수 자리 (API 설계서 번호)
   async function handleCreate(form) {} // API-08
-  async function handleUpdate(id, changes) {} // API-09
+  async function handleUpdate(id, changes) {
+    try {
+      if (Object.keys(changes).length > 0) {
+        await updateBook(id, { ...changes, updatedAt: new Date().toISOString() });
+      }
+      goDetail(id);
+    } catch {
+      setNotice({ type: "error", text: "도서 정보를 저장하지 못했어요. 다시 시도해 주세요." });
+    }
+  }
   async function handleDelete(id) {} // API-11
 
   async function handleLike(book, liked) {
@@ -97,6 +110,7 @@ function App() {
         {page === "edit" && (
           <BookForm
             mode="edit"
+            initialBook={editingBook}
             onSubmit={(changes) => handleUpdate(selectedId, changes)}
             onCancel={() => goDetail(selectedId)}
           />
