@@ -1,6 +1,6 @@
-// 서비스 정보 (발표 전에 조 이름 확인)
+// 서비스 정보
 export const SERVICE_NAME = '북커버 AI 도서관';
-export const TEAM_NAME = 'KT AIVLE School AI 트랙 미니프로젝트 4차, 3반 ○조';
+export const TEAM_NAME = 'KT AIVLE School AI 트랙 미니프로젝트 4차, 3반 9조';
 export const GITHUB_URL = 'https://github.com/ha-rameter/book_eating_cat';
 
 // 구분 (상위 분류). 홈 탭은 맨 앞에 종합을 붙여서 사용
@@ -18,7 +18,7 @@ export const CATEGORIES = [
 ];
 
 // 구분별 장르 (하위 분류)
-// 소설/시는 팀 확정 목록, 나머지는 예시라 팀에서 정해서 바꾸기
+// 소설/시는 확정 목록
 export const CATEGORY_GENRES = {
   '에세이': ['일상', '여행', '감성', '인물'],
   '소설/시': ['일반소설', '로맨스', '판타지', 'SF', '추리/스릴러', '호러', '무협', '역사소설', '시', '희곡'],
