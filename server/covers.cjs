@@ -46,7 +46,7 @@ covers.post('/api/covers', async (req, res) => {
   }
 
   try {
-    const images = await generateCovers(apiKey, book, '수채화');
+    const images = await generateCovers(apiKey, book);
     if (images.length !== COVER_SETTINGS.n) {
       return res.status(502).json({ error: '표지 후보 두 장을 받지 못했어요.' });
     }

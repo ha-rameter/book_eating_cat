@@ -94,7 +94,7 @@ export function getCoverStyle(category, genre) {
 }
 
 // 프롬포트 만들기
-export function buildCoverPrompt(book, coverStyle) {
+export function buildCoverPrompt(book) {
   const { style, mood } = getCoverStyle(book.category, book.genre);
 
   const lines = [
@@ -109,7 +109,7 @@ export function buildCoverPrompt(book, coverStyle) {
   if (book.category) lines.push(`구분: ${book.category}`);
   if (book.genre) lines.push(`장르: ${book.genre}`);
 
-  lines.push(`내용: ${book.contents}`, '', '[화풍]', coverStyle ?? style);
+  lines.push(`내용: ${book.contents}`, '', '[화풍]', style);
   if (mood) lines.push('', '[분위기]', mood);
 
   lines.push(
@@ -135,7 +135,7 @@ export function toDataUrl(b64) {
 
 // 서버에서 표지 후보를 생성할 때 사용한다.
 
-export async function generateCovers(apiKey, book, coverStyle) {
+export async function generateCovers(apiKey, book) {
   if (!apiKey) {
     throw new Error('API 키가 없어요. API 키를 확인해 주세요.');
   }
@@ -148,7 +148,7 @@ export async function generateCovers(apiKey, book, coverStyle) {
     },
     body: JSON.stringify({
       ...COVER_SETTINGS,
-      prompt: buildCoverPrompt(book, coverStyle),
+      prompt: buildCoverPrompt(book),
     }),
     signal: AbortSignal.timeout(180_000),
   });

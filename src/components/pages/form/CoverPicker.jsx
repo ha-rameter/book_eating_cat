@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { generateCovers } from '../../../api';
 import { LIMITS } from '../../../constants';
 
-// AI 표지: 버튼 하나로 후보 2장 생성 후 1장 선택. gpt-image-2, low, 1024x1536, png, 수채화 고정 (API-13)
+// AI 표지: 버튼 하나로 후보 2장 생성 후 1장 선택. gpt-image-2, low, 1024x1536, png, 장르별 화풍 (API-13)
 function CoverPicker({ book, onSelect }) {
   const [covers, setCovers] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
