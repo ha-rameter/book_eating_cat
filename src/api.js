@@ -36,4 +36,22 @@ export async function updateBook(id, changes) {}
 export async function deleteBook(id) {}
 
 // API-13 표지 후보 2장 생성, Data URL 배열로 돌려주기
-export async function generateCovers(apiKey, book) {}
+export async function generateCovers(book) {
+  const { title, author, contents, category, genre } = book;
+  const response = await fetch(new URL('/api/covers', API_URL), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, author, contents, category, genre }),
+  }).catch(() => {
+    throw new Error('표지 서버에 연결할 수 없어요. 서버가 실행 중인지 확인해 주세요.');
+  });
+
+  const data = await response.json().catch(() => null);
+  if (!response.ok) {
+    throw new Error(data?.error || '표지 생성에 실패했어요.');
+  }
+  if (!Array.isArray(data?.images) || data.images.length !== COVER_SETTINGS.n) {
+    throw new Error('표지 후보 두 장을 받지 못했어요.');
+  }
+  return data.images;
+}

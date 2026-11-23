@@ -3,8 +3,6 @@
 import {CATEGORIES, CATEGORY_GENRES} from './constants.js';
 import {OPENAI_IMAGE_API_URL, COVER_SETTINGS} from './api.js';
 
-const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-
 // 화풍
 const CATEGORY_MOODS = {
   '에세이': '따뜻하고 개인적인 분위기, 부드럽고 차분한 색감',
@@ -77,7 +75,7 @@ const GENRE_STYLES = {
 // 구분이나 장르가 지정되지 않았을 경우
 const DEFAULT_STYLE = '책 내용과 분위기에 가장 잘 어울리는 화풍을 직접 골라서 작업해.';
 
-if (import.meta.env.DEV) {
+if (import.meta.env?.DEV) {
     const allGenres = Object.values(CATEGORY_GENRES).flat();
     Object.keys(CATEGORY_MOODS)
         .filter((key) => !CATEGORIES.includes(key))
@@ -96,7 +94,7 @@ export function getCoverStyle(category, genre) {
 }
 
 // 프롬포트 만들기
-export function buildCoverPrompt(book) {
+export function buildCoverPrompt(book, coverStyle) {
   const { style, mood } = getCoverStyle(book.category, book.genre);
 
   const lines = [
@@ -111,7 +109,7 @@ export function buildCoverPrompt(book) {
   if (book.category) lines.push(`구분: ${book.category}`);
   if (book.genre) lines.push(`장르: ${book.genre}`);
 
-  lines.push(`내용: ${book.contents}`, '', '[화풍]', style);
+  lines.push(`내용: ${book.contents}`, '', '[화풍]', coverStyle ?? style);
   if (mood) lines.push('', '[분위기]', mood);
 
   lines.push(
@@ -135,11 +133,10 @@ export function toDataUrl(b64) {
   return `data:image/${COVER_SETTINGS.output_format};base64,${b64}`;
 }
 
-// 표지 후보 (coverpicker에서 사용)
+// 서버에서 표지 후보를 생성할 때 사용한다.
 
-export async function generateCovers(apiKey, book) {
-  const key = apiKey || API_KEY;
-  if (!key) {
+export async function generateCovers(apiKey, book, coverStyle) {
+  if (!apiKey) {
     throw new Error('API 키가 없어요. API 키를 확인해 주세요.');
   }
 
@@ -147,12 +144,13 @@ export async function generateCovers(apiKey, book) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${key}`,
+      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
       ...COVER_SETTINGS,
-      prompt: buildCoverPrompt(book),
+      prompt: buildCoverPrompt(book, coverStyle),
     }),
+    signal: AbortSignal.timeout(180_000),
   });
 
   const data = await res.json();
@@ -161,5 +159,8 @@ export async function generateCovers(apiKey, book) {
     throw new Error(data?.error?.message || `표지 생성 실패 (${res.status})`);
   }
 
-  return data.data.map((item) => toDataUrl(item.b64_json));
+  if (!Array.isArray(data?.data)) return [];
+  return data.data
+    .filter((item) => typeof item?.b64_json === 'string' && item.b64_json.trim())
+    .map((item) => toDataUrl(item.b64_json.trim()));
 }
