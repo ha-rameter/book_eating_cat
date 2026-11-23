@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CATEGORIES, CATEGORY_GENRES, LIMITS } from '../../../constants';
+import CoverPicker from './CoverPicker';
 
 // 제목, 저자, 내용에서 앞뒤 공백을 뺀 뒤 항목별로 오류 문구를 모은다.
 function validate(form) {
@@ -26,6 +27,7 @@ function BookForm({ mode, initialBook, onSubmit, onCancel }) {
     contents: book?.contents ?? '',
     category: book?.category ?? '',
     genre: book?.genre ?? '',
+    coverImageUrl: book?.coverImageUrl ?? '',
   }));
 
   // 오류는 입력이 바뀔 때마다 계산하고, 첫 제출 시도부터 화면에 보여 준다.
@@ -121,6 +123,10 @@ function BookForm({ mode, initialBook, onSubmit, onCancel }) {
         </select>
       </p>
       {renderTextField('contents', '책의 내용과 분위기를 적어 주세요.')}
+      <CoverPicker
+        book={form}
+        onSelect={(coverImageUrl) => setForm((current) => ({ ...current, coverImageUrl }))}
+      />
       <button type="button" className="btn" onClick={onCancel}>취소</button>{' '}
       <button type="submit" className="btn btn-primary">{editing ? '저장' : '등록'}</button>
     </form>
