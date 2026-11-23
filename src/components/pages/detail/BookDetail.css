@@ -298,3 +298,9 @@
   color: var(--ink);
   border-color: var(--ink);
 }
+
+/* 좋아요를 누른 상태: 검정 바탕에 흰 글씨 */
+.detail-like-button.liked {
+  background: var(--ink);
+  color: #fff;
+}
