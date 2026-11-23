@@ -36,7 +36,27 @@ export async function getBook(id) {
 }
 
 // API-08 등록
-export async function createBook(book) {}
+export async function createBook(book) {
+  const now = new Date().toISOString();
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      ...book,
+      likeCount: 0,
+      review: 0,
+      reviewCount: 0,
+      createdAt: now,
+      updatedAt: now,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("도서 등록에 실패했습니다.");
+  }
+
+  return res.json();
+}
 
 // API-09 수정, API-10 좋아요, API-15 별점 주기 (바뀐 필드만 PATCH)
 export async function updateBook(id, changes) {
