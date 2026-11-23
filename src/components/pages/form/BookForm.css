@@ -1,0 +1,214 @@
+.book-form {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.book-form-heading {
+  margin-bottom: 24px;
+}
+
+.book-form-heading h1 {
+  margin: 0;
+  font-size: clamp(25px, 4vw, 30px);
+  line-height: 1.35;
+}
+
+.book-form-heading p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.book-form-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.book-form-fields,
+.book-form-cover-panel {
+  display: grid;
+  min-width: 0;
+  padding: clamp(16px, 3vw, 24px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.book-form-fields {
+  gap: 16px;
+}
+
+.book-form-field {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
+.book-form-field label {
+  font-weight: 600;
+}
+
+.book-form-required,
+.book-form-optional {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.book-form-required {
+  color: var(--accent);
+}
+
+.book-form-optional,
+.book-form-count,
+.book-form-cover-hint {
+  color: var(--muted);
+}
+
+.book-form-field input,
+.book-form-field select,
+.book-form-field textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.book-form-field textarea {
+  resize: vertical;
+}
+
+.book-form-field select:disabled {
+  background: var(--bg);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.book-form-field [aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.book-form-field input:focus-visible,
+.book-form-field select:focus-visible,
+.book-form-field textarea:focus-visible,
+.book-form-cover-choice:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.book-form-field-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.book-form-count {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.book-form-error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.book-form-select-row,
+.book-form-cover-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.book-form-cover-panel {
+  gap: 14px;
+}
+
+.book-form-cover-panel h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.book-form-cover-hint {
+  margin: 0;
+  font-size: 13px;
+}
+
+.book-form-cover-choices:empty {
+  display: none;
+}
+
+.book-form-cover-choice {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book-form-cover-choice[data-selected='true'] {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.book-form-cover-choice img,
+.book-form-current-cover img {
+  display: block;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.book-form-cover-choice img {
+  width: 100%;
+}
+
+.book-form-choice-label,
+.book-form-current-cover {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.book-form-choice-label input {
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.book-form-current-cover {
+  margin: 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--muted);
+}
+
+.book-form-current-cover img {
+  width: 64px;
+}
+
+.book-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+@media (max-width: 760px) {
+  .book-form-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .book-form-select-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
