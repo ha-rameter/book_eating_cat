@@ -263,3 +263,38 @@
     font-size: 25px;
   }
 }
+
+.detail-tag {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.detail-cover {
+  border-radius: 0;
+  background: #f6f6f6;
+  color: #b5b5b5;
+  font-family: var(--serif);
+}
+
+.detail-content {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 2;
+}
+
+.detail-information h1 {
+  font-size: 34px;
+}
+
+.rating-panel {
+  border-radius: 0;
+}
+
+.detail-like-button,
+.detail-like-button.liked {
+  color: var(--ink);
+  border-color: var(--ink);
+}
