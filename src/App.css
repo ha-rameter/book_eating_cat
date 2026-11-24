@@ -5,13 +5,13 @@
   --ink: #23201b;
   --muted: #6f685d;
   --line: #e3ddd2;
-  --primary: #2f4a3a;
-  --primary-soft: #e4ece6;
-  --accent: #b5562c;
+  --primary: #1a1a1a;
+  --primary-soft: #f6f6f6;
+  --accent: #1a1a1a;
   --danger: #b3261e;
   --danger-soft: #fbe9e7;
-  --success: #2e7d4f;
-  --success-soft: #e3f3e9;
+  --success: #1a1a1a;
+  --success-soft: #f6f6f6;
   --like: #c0362e;
   --star: #c9a227;
 }
@@ -429,8 +429,8 @@ textarea {
 }
 
 .notice-success {
-  background: var(--success-soft);
-  color: var(--success);
+  background: var(--ink);
+  color: #fff;
 }
 
 .notice-error {
