@@ -610,13 +610,13 @@ textarea {
   }
 }
 
-.btn:hover {
+.btn:not(:disabled):hover {
   background: var(--ink);
   border-color: var(--ink);
   color: #fff;
 }
 
-.btn-primary:hover {
+.btn-primary:not(:disabled):hover {
   background: #fff;
   color: var(--ink);
 }
