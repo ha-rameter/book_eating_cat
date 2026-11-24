@@ -229,9 +229,28 @@ textarea {
   cursor: pointer;
 }
 
-.side-menu-link:hover,
+.side-menu-link:not(:disabled):hover,
 .side-menu-link.is-current {
   background: #f4f9f8;
+}
+
+.side-menu-link-soon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.side-menu-soon-badge {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #f7efe1;
+  color: #9a6423;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .side-menu-link.is-current {
