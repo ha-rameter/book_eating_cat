@@ -131,7 +131,7 @@ export async function generateCovers(book) {
 
   const data = await response.json().catch(() => null);
   if (!response.ok) {
-    throw new Error(data?.error || "표지 생성에 실패했어요.");
+    throw new Error(data?.error || "표지 서버에 연결할 수 없어요. 서버가 실행 중인지 확인해 주세요.");
   }
   if (!Array.isArray(data?.images) || data.images.length !== COVER_SETTINGS.n) {
     throw new Error("표지 후보 두 장을 받지 못했어요.");
