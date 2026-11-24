@@ -1,11 +1,9 @@
-
 import { useEffect, useState } from 'react';
 import { getBook } from '../../../api.js';
 import LikeButton from './LikeButton.jsx';
 import StarRating from './StarRating.jsx';
 import './BookDetail.css';
 
-// 별점마다 붙는 한 줄
 const RATING_LABELS = ['', '아쉬웠어요', '그저 그랬어요', '괜찮았어요', '좋았어요', '인생 책이에요'];
 
 // 도서 상세 화면 (API-07)

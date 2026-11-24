@@ -1,17 +1,16 @@
-/* 색상 변수, 모든 컴포넌트가 같이 사용 */
 :root {
   --bg: #f6f4ef;
   --surface: #ffffff;
   --ink: #23201b;
   --muted: #6f685d;
   --line: #e3ddd2;
-  --primary: #2f4a3a;
-  --primary-soft: #e4ece6;
-  --accent: #b5562c;
+  --primary: #1a1a1a;
+  --primary-soft: #f6f6f6;
+  --accent: #1a1a1a;
   --danger: #b3261e;
   --danger-soft: #fbe9e7;
-  --success: #2e7d4f;
-  --success-soft: #e3f3e9;
+  --success: #1a1a1a;
+  --success-soft: #f6f6f6;
   --like: #c0362e;
   --star: #c9a227;
 }
@@ -429,8 +428,8 @@ textarea {
 }
 
 .notice-success {
-  background: var(--success-soft);
-  color: var(--success);
+  background: var(--ink);
+  color: #fff;
 }
 
 .notice-error {
@@ -837,7 +836,6 @@ mark {
   color: var(--primary);
 }
 
-/* 브런치 감성: 흰색과 검정, 제목은 명조, 본문은 가는 고딕 */
 :root {
   --bg: #ffffff;
   --surface: #ffffff;
@@ -1010,6 +1008,7 @@ h3,
 .book-card-overlay-text {
   display: -webkit-box;
   -webkit-line-clamp: 5;
+  line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-family: var(--serif);
@@ -1022,7 +1021,6 @@ h3,
     transition: none;
   }
 }
-/* 시간대 인사 */
 .home-greeting {
   margin: 8px 0 20px;
   font-family: var(--serif);

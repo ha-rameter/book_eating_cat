@@ -1,4 +1,3 @@
-// 도서 목록 위 필터: 위 줄 구분 탭(종합 포함 11개), 아래 줄 고른 구분의 장르 칩(전체 포함)
 import {CATEGORIES, CATEGORY_GENRES} from '../../../constants'
 
 function CategoryFilter({ category, genre, onChange }) {

@@ -1,4 +1,3 @@
-// 검색 결과: 검색 기준, 검색어, 결과 권수, 제목 안 검색어 강조. 0권이면 StateBox로 안내
 import BookCard from './BookCard';
 import StateBox from './StateBox';
 

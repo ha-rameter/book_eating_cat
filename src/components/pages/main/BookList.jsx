@@ -1,4 +1,3 @@
-// 최신 등록순 도서 목록, 5권씩 더 보기, 전체 권수 표시 (API-02, 05, 06)
 import { useState, useEffect } from 'react';
 import { getLatestBooks } from '../../../api';
 import BookCard from './BookCard';
