@@ -41,6 +41,15 @@ function BookCard({ book, rank, keyword, onSelect, onLike }) {
             <span className="book-card-no-cover">표지 없음</span>
           )}
           {rank != null && <span className="book-card-rank">{rank}위</span>}
+          {book.contents && (
+            <span className="book-card-overlay" aria-hidden="true">
+              <span className="book-card-overlay-meta">
+                <span>{[book.category, book.genre].filter(Boolean).join(" > ") || "미분류"}</span>
+                <span>♥ {book.likeCount || 0}</span>
+              </span>
+              <span className="book-card-overlay-text">{book.contents}</span>
+            </span>
+          )}
         </span>
         <span className="book-card-content">
           <strong className="book-card-title">
@@ -54,7 +63,7 @@ function BookCard({ book, rank, keyword, onSelect, onLike }) {
               book.title
             )}
           </strong>
-          <span className="book-card-author">{book.author}</span>
+          <span className="book-card-author"><em>by</em> {book.author}</span>
           <span className="book-card-meta">
             {[book.category, book.genre].filter(Boolean).join(", ") || "미분류"}
           </span>

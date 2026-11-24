@@ -833,3 +833,189 @@ mark {
 .site-footer-inner a {
   color: var(--primary);
 }
+
+/* 브런치 감성: 흰색과 검정, 제목은 명조, 본문은 가는 고딕 */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --ink: #1a1a1a;
+  --muted: #8a8a8a;
+  --line: #ebebeb;
+  --primary: #1a1a1a;
+  --primary-soft: #f6f6f6;
+  --accent: #1a1a1a;
+  --like: #1a1a1a;
+  --star: #1a1a1a;
+  --serif: 'Noto Serif KR', 'Nanum Myeongjo', 'Batang', serif;
+  --sans: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+h1,
+h2,
+h3,
+.site-brand-name,
+.section-title,
+.book-card-title,
+.detail-information h1,
+.book-form-heading h1,
+.side-menu-brand {
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.section-title small {
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+.book-card-author em,
+.book-author em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--muted);
+  margin-right: 2px;
+}
+
+.site-brand-strong::after {
+  background: var(--ink);
+}
+
+.btn {
+  border-radius: 2px;
+  font-weight: 400;
+}
+
+.btn-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.book-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.book-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.book-card:hover .book-card-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.book-card-cover {
+  border: 1px solid var(--line);
+  background: #f6f6f6;
+}
+
+.book-card-no-cover {
+  background: #f6f6f6;
+  font-family: var(--serif);
+  color: #b5b5b5;
+}
+
+.book-card-content {
+  padding: 12px 2px 4px;
+}
+
+.book-card-title {
+  font-size: 16px;
+}
+
+.book-card-rank {
+  border-radius: 0;
+  background: var(--ink);
+  font-family: var(--serif);
+}
+
+.book-card-like-slot {
+  padding: 0 2px 8px;
+}
+
+.search {
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 6px 0;
+}
+
+.search .input {
+  border: 0;
+}
+
+.tab.active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.chip {
+  border-radius: 2px;
+}
+
+.chip.active {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.site-footer {
+  background: #ffffff;
+}
+
+.book-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 14px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.35) 100%);
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.book-card:hover .book-card-overlay,
+.book-card-main:focus-visible .book-card-overlay {
+  opacity: 1;
+}
+
+.book-card-rank {
+  z-index: 2;
+}
+
+.book-card-overlay-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.book-card-overlay-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: var(--serif);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-card-overlay {
+    transition: none;
+  }
+}

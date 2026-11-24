@@ -172,7 +172,7 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
 
         <div className="detail-information">
           <h1>{book.title}</h1>
-          <p className="book-author">{book.author}</p>
+          <p className="book-author"><em>by</em> {book.author}</p>
 
           <div className="detail-meta">
             {book.category && <span className="detail-tag">{book.category}</span>}
