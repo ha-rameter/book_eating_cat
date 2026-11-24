@@ -1,5 +1,5 @@
 // API 주소 상수
-export const API_URL = "http://localhost:3000/books";
+export const API_URL = "/books";
 export const OPENAI_IMAGE_API_URL =
   "https://api.openai.com/v1/images/generations";
 
@@ -119,7 +119,7 @@ export async function deleteBook(id) {
 // API-13 표지 후보 2장 생성, Data URL 배열로 돌려주기
 export async function generateCovers(book) {
   const { title, author, contents, category, genre } = book;
-  const response = await fetch(new URL("/api/covers", API_URL), {
+  const response = await fetch("/api/covers", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, author, contents, category, genre }),
