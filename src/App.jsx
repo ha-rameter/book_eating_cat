@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/layout/Header";
 import HamburgerMenu from "./components/layout/HamburgerMenu";
@@ -16,6 +16,12 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   // 성공, 실패 알림 { type: 'success' 또는 'error', text }
   const [notice, setNotice] = useState(null);
+
+  useEffect(() => {
+    if (!notice) return;
+    const timer = setTimeout(() => setNotice(null), 3000);
+    return () => clearTimeout(timer);
+  }, [notice]);
 
   function goHome() {
     setPage("home");
@@ -46,6 +52,7 @@ function App() {
     try {
       const book = await createBook(form);
       goDetail(book.id);
+      setNotice({ type: "success", text: "도서를 등록했어요." });
     } catch {
       setNotice({ type: "error", text: "도서를 등록하지 못했어요. 다시 시도해 주세요." });
     }
@@ -56,6 +63,7 @@ function App() {
         await updateBook(id, { ...changes, updatedAt: new Date().toISOString() });
       }
       goDetail(id);
+      setNotice({ type: "success", text: "도서 정보를 수정했어요." });
     } catch {
       setNotice({ type: "error", text: "도서 정보를 저장하지 못했어요. 다시 시도해 주세요." });
     }
@@ -64,6 +72,7 @@ function App() {
     try {
       await deleteBook(id);
       goHome();
+      setNotice({ type: "success", text: "도서를 삭제했어요." });
     } catch {
       setNotice({ type: "error", text: "도서를 삭제하지 못했어요. 다시 시도해 주세요." });
     }
@@ -73,10 +82,12 @@ function App() {
     // API-10
     const nextLikeCount = Math.max(0, (book.likeCount ?? 0) + (liked ? 1 : -1));
 
-    return await updateBook(book.id, {
+    const updated = await updateBook(book.id, {
       likeCount: nextLikeCount,
       updatedAt: new Date().toISOString(),
     });
+    setNotice({ type: "success", text: liked ? "좋아요를 눌렀어요." : "좋아요를 취소했어요." });
+    return updated;
   }
 
   
@@ -88,11 +99,13 @@ function App() {
     const nextAverage =
       (currentAverage * currentCount + score) / nextCount;
 
-    return await updateBook(book.id, {
+    const updated = await updateBook(book.id, {
       review: Math.round(nextAverage * 10) / 10,
       reviewCount: nextCount,
       updatedAt: new Date().toISOString(),
     });
+    setNotice({ type: "success", text: "별점을 남겼어요." });
+    return updated;
   }
 
 
