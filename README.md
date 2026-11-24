@@ -16,44 +16,52 @@ KT AIVLE School AI 트랙 미니프로젝트 4차, 3반 9조
 ## 주요 화면
 
 ### 홈
-시간대별 인사와 검색창, 좋아요 순 인기 도서 10권을 보여 줍니다.
+시간대별 인사와 검색창, 좋아요 순 인기 도서 10권, 최신 도서 목록을 보여 줍니다.
 
 ![홈](docs/screenshots/01_home.jpg)
 
-### 도서 목록
-최신 등록순으로 5권씩 보여 주고, 구분 탭과 장르 칩으로 원하는 책만 고를 수 있습니다.
-
-![도서 목록](docs/screenshots/02_list.jpg)
-
-### 카드 내용 미리보기
-카드 표지 위에 마우스를 올리면 구분, 장르, 좋아요 수와 책 내용이 나타납니다.
-
-![카드 내용 미리보기](docs/screenshots/03_hover.jpg)
-
 ### 검색 결과
-제목이나 저자로 찾고, 찾은 글자를 강조해서 보여 줍니다.
+제목이나 저자로 찾고, 찾은 글자를 하이라이트로 표시합니다.
 
-![검색 결과](docs/screenshots/04_search.jpg)
+![검색 결과](docs/screenshots/02_search.jpg)
+
+### 햄버거 메뉴
+홈, 새 도서 등록, 이용 안내로 이동합니다. 독서 클럽은 준비 중입니다.
+
+![햄버거 메뉴](docs/screenshots/03_menu.jpg)
+
+### 새 도서 등록
+제목, 저자, 내용을 적고 AI 표지 2개 만들기를 누르면 후보 2장이 나오고, 1장을 골라 함께 등록합니다.
+
+![새 도서 등록](docs/screenshots/04_register.png)
+
+표지를 기다리는 동안 안내 문구가 바뀌고, 생성 비용 안내가 함께 보입니다.
+
+![표지 생성 대기](docs/screenshots/05_waiting.jpg)
 
 ### 도서 상세
 표지와 책 정보, 별점 주기, 좋아요, 수정, 삭제를 한 화면에서 할 수 있습니다.
 
-![도서 상세](docs/screenshots/05_detail.jpg)
+![도서 상세](docs/screenshots/06_detail.png)
 
-### 새 도서 등록
-제목, 저자, 내용을 적고 AI 표지 2개 만들기를 누르면 표지 후보 2장이 나오고, 1장을 골라 함께 등록합니다. 표지 없이 등록할 수도 있습니다.
+등록, 수정, 삭제, 좋아요, 별점이 끝나면 3초 동안 완료 알림이 보입니다.
 
-![새 도서 등록](docs/screenshots/06_register.jpg)
+![완료 알림](docs/screenshots/07_notice.jpg)
 
 ### 도서 정보 수정
-기존 내용과 현재 표지를 채운 채로 열리고, 바뀐 칸만 저장합니다. 바뀐 내용이 없으면 저장 버튼이 잠깁니다.
+기존 내용과 현재 표지를 채운 채로 열리고, 바뀐 항목만 저장합니다.
 
-![도서 정보 수정](docs/screenshots/07_edit.jpg)
+![도서 정보 수정](docs/screenshots/08_edit.jpg)
 
-### 햄버거 메뉴와 이용 안내
-![햄버거 메뉴](docs/screenshots/08_menu.jpg)
+### 삭제 확인
+삭제하기 전에 책 제목이 들어간 확인 창을 한 번 더 보여 줍니다.
 
-![이용 안내](docs/screenshots/09_guide.jpg)
+![삭제 확인](docs/screenshots/09_delete.jpg)
+
+### 모바일 화면
+같은 와이파이의 휴대폰에서 npm run dev 터미널에 나오는 Network 주소로 접속할 수 있습니다.
+
+![모바일 화면](docs/screenshots/10_mobile.jpg)
 
 ## 실행 방법
 
