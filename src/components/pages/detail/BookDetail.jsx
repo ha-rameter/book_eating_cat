@@ -48,7 +48,6 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
 
     if (bookId === null || bookId === undefined) {
       setBook(null);
-      // setError('도서 ID가 없습니다.');
       setError('도서 정보를 찾을 수 없어요. 목록에서 다시 선택해 주세요.'); // 수정
       setLoading(false);
     } else {
@@ -82,11 +81,6 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
     setBook(updatedBook);
   };
 
-  // 별점 선택 및 상위 콜백 호출
-  // const handleRating = (score) => {
-  //   setRating(score);
-  //   onRate?.(book, score);
-  // };
   // KJG - 별을 누르면 고르기만 하고 저장은 하지 않음
   const handleRating = (score) => {
     if (rated) return;
@@ -118,9 +112,6 @@ function BookDetail({ bookId, onBack, onEdit, onDelete, onLike, onRate }) {
     return <div className="detail">도서 정보를 불러오는 중입니다...</div>;
   }
 
-  // if (error) {
-  //   return <div className="detail">오류: {error}</div>;
-  // }
   // KJG - 돌아가기버튼 추가
   if (error) {
   return (
