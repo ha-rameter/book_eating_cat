@@ -593,11 +593,14 @@ textarea {
 }
 
 .btn:hover {
-  background: var(--bg);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
 }
 
 .btn-primary:hover {
-  background: #233a2d;
+  background: #fff;
+  color: var(--ink);
 }
 
 .input {
