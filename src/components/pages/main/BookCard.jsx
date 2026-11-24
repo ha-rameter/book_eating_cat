@@ -70,7 +70,7 @@ function BookCard({ book, rank, keyword, onSelect, onLike }) {
           <span className="book-card-stats">
             <span className="book-card-rating">
               <span aria-hidden="true">★</span>{" "}
-              {Number(book.review || 0).toFixed(1)} ({book.reviewCount || 0})
+              {book.reviewCount ? `${Number(book.review).toFixed(1)} (${book.reviewCount})` : "첫 별점을 기다려요"}
             </span>
             {rank != null && (
               <span className="book-card-likes">

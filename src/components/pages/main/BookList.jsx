@@ -57,7 +57,7 @@ function BookList({ category, genre, onSelect, onLike, onRegister }) {
 
   if (!loading && books.length === 0) {
     return (
-      <StateBox type="empty" message="이 조건에 맞는 도서가 아직 없어요. 첫 도서를 등록해 보세요.">
+      <StateBox type="empty" message="이 길에는 아직 꽂힌 책이 없어요. 첫 책을 꽂아 주세요.">
         <button className="btn btn-primary" onClick={onRegister}>
           새 도서 등록하기
         </button>
