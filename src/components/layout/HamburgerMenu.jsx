@@ -79,6 +79,10 @@ function HamburgerMenu({ open, current, onClose, onNavigate }) {
           <button className={`side-menu-link${current === 'register' ? ' is-current' : ''}`} type="button" aria-current={current === 'register' ? 'page' : undefined} onClick={() => navigate('register')}>
             새 도서 등록
           </button>
+          <button className="side-menu-link side-menu-link-soon" type="button" disabled>
+            <span>독서 클럽</span>
+            <span className="side-menu-soon-badge">준비 중</span>
+          </button>
           <button className="side-menu-link" type="button" onClick={openHelp}>이용 안내</button>
         </nav>
         <a className="side-menu-github" href={GITHUB_URL} target="_blank" rel="noopener noreferrer" onClick={onClose}>
