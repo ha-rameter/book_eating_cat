@@ -3,7 +3,6 @@ import { generateCovers } from '../../../api';
 import { LIMITS } from '../../../constants';
 
 // AI 표지: 버튼 하나로 후보 2장 생성 후 1장 선택. gpt-image-2, low, 1024x1536, png, 장르별 화풍 (API-13)
-// 표지를 기다리는 동안 3초마다 바뀌는 문구
 const WAIT_MESSAGES = ['작가가 붓을 고르고 있어요', '밑그림을 그리는 중이에요', '물감이 마르는 중이에요', '마지막 한 획을 더하고 있어요'];
 
 function CoverPicker({ book, onSelect }) {

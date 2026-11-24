@@ -1,4 +1,3 @@
-// 푸터: 서비스명, 조 정보, GitHub 저장소 링크(새 탭), AI 생성 표지 안내
 import { SERVICE_NAME, TEAM_NAME, GITHUB_URL } from '../../constants';
 
 function Footer() {

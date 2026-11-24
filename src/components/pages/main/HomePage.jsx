@@ -1,4 +1,3 @@
-// 홈 화면 묶음: 검색 결과가 있으면 SearchResult, 없으면 PopularBooks, CategoryFilter, BookList
 import { useState } from 'react';
 import { searchBooks } from '../../../api';
 import SearchBar from './SearchBar';
@@ -8,7 +7,6 @@ import CategoryFilter from './CategoryFilter';
 import BookList from './BookList';
 import StateBox from './StateBox';
 
-// 시간대에 따라 바뀌는 인사
 function getGreeting() {
   const hour = new Date().getHours();
   if (hour >= 5 && hour < 11) return '맑은 아침, 어떤 이야기와 산책할까요?';
