@@ -79,13 +79,28 @@ function App() {
     });
   }
 
-  async function handleRate(book, score) {} // API-15
+  
+  async function handleRate(book, score) { // API-15 별점 주기
+    const currentCount = Number(book.reviewCount) || 0;
+    const currentAverage = Number(book.review) || 0;
+
+    const nextCount = currentCount + 1;
+    const nextAverage =
+      (currentAverage * currentCount + score) / nextCount;
+
+    return await updateBook(book.id, {
+      review: Math.round(nextAverage * 10) / 10,
+      reviewCount: nextCount,
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
 
   return (
     <div className="app">
       <Header
         onMenuOpen={() => setMenuOpen(true)}
-        onGoHome={goHome}
+        onGoHome={() => window.location.reload()}
         onGoRegister={goRegister}
       />
       <HamburgerMenu

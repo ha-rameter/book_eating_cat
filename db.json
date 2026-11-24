@@ -22,11 +22,11 @@
       "genre": "판타지",
       "category": "소설/시",
       "coverImageUrl": "",
-      "likeCount": 42,
-      "review": 4.8,
-      "reviewCount": 30,
+      "likeCount": 43,
+      "review": 4.7,
+      "reviewCount": 31,
       "createdAt": "2026-11-20T02:00:00.000Z",
-      "updatedAt": "2026-11-20T02:00:00.000Z"
+      "updatedAt": "2026-11-24T01:24:34.668Z"
     },
     {
       "id": 3,
@@ -121,7 +121,7 @@
       "category": "실용/예술/취미",
       "coverImageUrl": "",
       "likeCount": 14,
-      "review": 4.0,
+      "review": 4,
       "reviewCount": 6,
       "createdAt": "2026-11-19T01:00:00.000Z",
       "updatedAt": "2026-11-19T01:00:00.000Z"
