@@ -51,6 +51,9 @@ function CoverPicker({ book, onSelect }) {
       <button type="button" className="btn btn-primary" onClick={handleGenerate} disabled={!canGenerate || isGenerating}>
         {isGenerating ? `${WAIT_MESSAGES[waitIndex]}...` : 'AI 표지 2개 만들기'}
       </button>
+      <p className="cover-cost-note">
+        ※ 생성을 시도할 때마다 이용 요금이 발생해요.
+      </p>
       {!canGenerate && <p className="book-form-cover-hint">제목과 내용을 입력하면 표지를 만들 수 있어요.</p>}
       {error && <p className="book-form-error" role="alert">{error}</p>}
       <div className="book-form-cover-choices">
