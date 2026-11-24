@@ -1029,3 +1029,10 @@ h3,
   color: var(--ink);
   letter-spacing: -0.02em;
 }
+
+/* 이용 요금 안내 */
+.cover-cost-note {
+  font-size: 0.8rem;
+  color: #666666;
+  margin-top: 6px;
+}
