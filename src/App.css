@@ -1055,3 +1055,38 @@ h3,
   color: #666666;
   margin-top: 6px;
 }
+
+@media (max-width: 560px) {
+  .home-greeting {
+    font-size: 21px;
+    word-break: keep-all;
+  }
+
+  .position,
+  .carousel .arrow {
+    display: none;
+  }
+
+  .carousel-view {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel-track {
+    transform: none !important;
+  }
+
+  .carousel-item {
+    flex: 0 0 42%;
+    scroll-snap-align: start;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .book-card-title {
+    word-break: keep-all;
+  }
+}
